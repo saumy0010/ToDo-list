@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <script src="https://kit.fontawesome.com/2523d598bf.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/8.8.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.8.0/firebase-database.js"></script>
+
+    <title>ToDo List</title>
+
+</head>
+
+<body>
+    <header class="header">
+        <img style="width: 100%; height:300px;" src="background.jpg">
+        <div class="container">
+
+            <div style="text-align: center;">
+
+                <input type="text" placeholder="Add Task" id="task">
+                <br>
+                <br>
+                <input type="submit" onclick="writeData()">
+
+                <br><br><br>
+                <div class="col-sm-12">
+                    <ul id="data" style="font-size: x-large; list-style-type:none;">
+
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </header>
+
+    <script>
+        // Your web app's Firebase configuration
+        var firebaseConfig = {
+            apiKey: "AIzaSyDtqVhKd0o8l-D9hcvsdc04G9v-T6CJMz0",
+            authDomain: "test-2-d4aa4.firebaseapp.com",
+            databaseURL: "https://test-2-d4aa4-default-rtdb.asia-southeast1.firebasedatabase.app",
+            projectId: "test-2-d4aa4",
+            storageBucket: "test-2-d4aa4.appspot.com",
+            messagingSenderId: "771225527920",
+            appId: "1:771225527920:web:9566e325fa33cde7ccf6b5"
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+
+        var map1 = new Map();
+
+        getData();
+
+
+        function writeData() {
+            firebase.database().ref('Tasks').push({
+                task: document.getElementById('task').value
+            });
+
+        }
+
+        // refreshing the table value with null
+        var task = '';
+        $("#data").html(task);
+
+        function renderlist() {
+            for (const item of map1.keys()) {
+                console.log(item);
+                task += `
+                <li>${item['task']}</li>
+                `
+            }
+            $("#data").html(task);
+        }
+
+        function getData() {
+
+            firebase.database().ref('Tasks').on('value', function(snapshot) {
+                map1.clear();
+
+                console.log("after clear", map1);
+                snapshot.forEach(function(childSnapshot) {
+                    var data = childSnapshot.val();
+                    var key = childSnapshot.key;
+
+                    map1.set(data, key);
+
+                });
+                renderlist()
+            });
+        }
+    </script>
+
+</body>
+
+</html>
