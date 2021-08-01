@@ -12,12 +12,17 @@ var firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 
 
-function writeData() {
-    firebase.database().ref('Tasks').push({
-        task: document.getElementById('task').value
-    });
+// adding enter key functionality to submit the task.
 
-}
+const form = document.getElementById('form');
+form.addEventListener('submit', (event) => {
+    event.preventDefault();
+    firebase.database().ref('Tasks').push({
+        task: form['task'].value
+    });
+});
+
+
 
 // Inserting the new task in the list.
 function insertData(id, task) {
@@ -47,16 +52,9 @@ firebase.database().ref('Tasks').on('child_added', function(snapshot) {
     insertData(key, data);
 });
 
-// adding enter key functionality to submit the task.
 
-let form = document.getElementById('form');
-form.addEventListener('submit', (event) => {
-    event.preventDefault();
-
-});
-
+// Delete a task by id
 function deleteData(dataKey) {
 
     firebase.database().ref('Tasks/' + dataKey).remove();
-
 }

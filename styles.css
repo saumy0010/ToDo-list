@@ -1,0 +1,55 @@
+form {
+    margin-top: 60px;
+    text-align: center;
+}
+
+form input {
+    width: 250px;
+    height: 40px;
+    font-size: x-large;
+    font-style: inherit;
+    border: 0;
+    outline: 0;
+    background: transparent;
+    border: 2px solid #96B0BC;
+    border-radius: 12px;
+}
+
+button {
+    position: relative;
+    background: #333;
+    border: none;
+    outline: none;
+    border-radius: 8px;
+    cursor: pointer;
+    width: 60px;
+    height: 30px;
+}
+
+button span {
+    color: #FFFFFF;
+}
+
+.anmi-shadow {
+    box-shadow: 0 5px 10px #efefef;
+}
+
+#anmi {
+    background: #fdeeea;
+}
+
+.navbar-style {
+    box-shadow: 0 5px 10px #efefef;
+    text-transform: uppercase;
+}
+
+#qoutes {
+    text-align: center;
+    font-weight: 700;
+    margin-top: 30px;
+}
+
+.navbar-header {
+    margin-top: -15px;
+    margin-bottom: -10px;
+}
