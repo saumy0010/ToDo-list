@@ -26,8 +26,9 @@ function insertData(id, task) {
     const input_element = document.createElement("input");
     input_element.type = 'radio';
     input_element.id = id;
-    input_element.onclick = console.log(this.id);
-
+    input_element.addEventListener('click', (event) => {
+		console.log(event.target.id);
+	})
     li_element.innerHTML = task['task'];
     li_element.appendChild(input_element);
     parent.appendChild(li_element);
