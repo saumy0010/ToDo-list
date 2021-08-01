@@ -11,10 +11,6 @@ var firebaseConfig = {
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 
-var map1 = new Map();
-
-getData();
-
 
 function writeData() {
     firebase.database().ref('Tasks').push({
@@ -23,38 +19,42 @@ function writeData() {
 
 }
 
-// refreshing the table value with null
-var task = '';
-$("#data").html(task);
+// Inserting the new task in the list.
+function insertData(id, task) {
+    const parent = document.getElementById('data');
+    const li_element = document.createElement("li");
+    const input_element = document.createElement("input");
+    input_element.type = 'radio';
+    input_element.id = id;
+    input_element.onclick = console.log(this.id);
 
-function renderlist() {
+    li_element.innerHTML = task['task'];
+    li_element.appendChild(input_element);
+    parent.appendChild(li_element);
 
-    var task = '';
-    $("#data").html(task);
 
-    for (const item of map1.keys()) {
-        console.log(item);
-        task += `
-        <li>${item['task']}</li>
-        `;
-    }
-    $("#data").html(task);
+
 }
 
-function getData() {
+// listener to recieve data from firebase RTDB
+firebase.database().ref('Tasks').on('child_added', function(snapshot) {
+    let key = snapshot.key
+    let data = snapshot.val();
+    insertData(key, data);
+});
 
-    firebase.database().ref('Tasks').on('value', function(snapshot) {
+// adding enter key functionality to submit the task.
 
-        map1.clear();
-        console.log("after clear", map1);
+let input = document.getElementById('task');
+input.addEventListener("keyup", (event) => {
+    if (event.keyCode === 13) {
+        document.getElementById('addTask').click();
+        input.value = '';
+    }
+});
 
-        snapshot.forEach(function(childSnapshot) {
-            var data = childSnapshot.val();
-            var key = childSnapshot.key;
+function deleteData(dataKey) {
 
-            map1.set(data, key);
+    console.log(dataKey);
 
-        });
-        renderlist()
-    });
 }
