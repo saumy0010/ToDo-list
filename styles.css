@@ -1,5 +1,4 @@
 form {
-    margin-top: 60px;
     text-align: center;
 }
 
@@ -91,4 +90,22 @@ button span {
     justify-content: center;
     align-items: center;
     margin-top: 50px;
+}
+
+#top {
+    background-color: #fdeeea;
+    width: 100%;
+    height: 50px;
+    position: fixed;
+    left: 0px;
+    top: 0px;
+    border-radius: 6px;
+    color: #333;
+    text-align: center;
+}
+
+#top h2 {
+    text-align: center;
+    font-weight: 500;
+    font-style: oblique;
 }
