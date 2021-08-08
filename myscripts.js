@@ -41,20 +41,18 @@ firebase.auth().onAuthStateChanged(firbaseUser => {
         function insertData(id, task) {
             const parent = document.getElementById('data');
             const li_element = document.createElement("li");
-            const input_element = document.createElement("input");
-            input_element.type = 'radio';
-            input_element.id = id;
-            li_element.id = id;
-            parent.style = 'background: #fdeeea';
 
-            input_element.addEventListener('click', (event) => {
+            li_element.id = id;
+            parent.style = 'font-size: xx-large';
+
+            li_element.addEventListener('click', (event) => {
                 deleteData(event.target.id);
                 var val = document.getElementById(`${event.target.id}`);
                 parent.removeChild(val);
             });
 
-            li_element.innerHTML = task['task'];
-            li_element.appendChild(input_element);
+            li_element.innerHTML = `<input type="checkbox" id="${id}"> ${task['task']}`;
+
             parent.appendChild(li_element);
         }
 
