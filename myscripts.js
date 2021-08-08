@@ -51,7 +51,7 @@ firebase.auth().onAuthStateChanged(firbaseUser => {
                 parent.removeChild(val);
             });
 
-            li_element.innerHTML = `<input type="checkbox" id="${id}"> ${task['task']}`;
+            li_element.innerHTML = `${task['task']}`;
 
             parent.appendChild(li_element);
         }

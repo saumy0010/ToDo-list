@@ -72,7 +72,6 @@
     }
     
     ul li:hover {
-        background-color: #efefef;
         margin-bottom: 10px;
         font-family: 'Poppins', sans-serif;
         border-radius: 6px;
